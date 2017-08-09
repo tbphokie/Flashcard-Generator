@@ -2,8 +2,9 @@
 var ClozeCard = function(text, cloze) {
 
     //First Validate
-    if(text.indexOf(cloze) == -1)
-        console.log("Error");
+    if(text.indexOf(cloze) == -1){
+        throw new Error("Could not create cloze card for " + text + ".\n");
+    }
     this.fullText = text;
     this.partial = text.replace(cloze, "...");
     this.cloze = cloze;

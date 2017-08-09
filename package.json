@@ -1,0 +1,22 @@
+{
+  "name": "flashcard-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tbphokie/Flashcard-Generator.git"
+  },
+  "author": "Terri Pannell",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tbphokie/Flashcard-Generator/issues"
+  },
+  "homepage": "https://github.com/tbphokie/Flashcard-Generator#readme",
+  "dependencies": {
+    "inquirer": "^3.2.1"
+  }
+}
