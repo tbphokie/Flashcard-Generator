@@ -7,7 +7,7 @@ let basic = require('./basicCards.json');
 let cloze = require('./clozeCards.json');
 
 
-
+//global variables
 var cards = [];
 var count = 0;
 var curCount = 0;
@@ -39,17 +39,20 @@ var startQuestions = [
     }
 ];
 
+//Called to start game
 function beginQuestions(){
     console.log("----Flashcards----");
 
     inquirer.prompt(startQuestions).then( function(answer) {
-
+        //sets/resets count and curCount
         count = answer.numQuestions;
         curCount = 0;
         askQuestions(answer);
     });
 }
 
+//First creates the "cards", either basic or cloze and then calls showQuestion to actully
+//display the questions
 function askQuestions(answer){
     if(answer.cardType === 'Basic' && cards.length === 0) {
         bBasic = true;
@@ -74,16 +77,17 @@ function askQuestions(answer){
     showQuestion();
 }
 
-var showQuestion = function(){  
-    console.log("curCount= " + curCount + "count= "+ count);
+//Displays a randomly picked question from the card stack
+var showQuestion = function(){
+
+    //Checks if need to stop asking questions, if so prompt for playing again, if not display a question
     if(curCount < count){
         //Math.floor(Math.random() * (max - min + 1)) + min;
         var index = Math.floor(Math.random() * ((cards.length - 1) - 0 + 1)) + 0;
         var msg = "";
         var ans = "";
 
-        console.log("index= " + index);
-
+        //Set the prompt text and correct answer variables here to be easier to check later
         if(bBasic === true){
             msg = (curCount+1) + ": " + cards[index].front+"\n";
             ans = cards[index].back;
@@ -91,6 +95,8 @@ var showQuestion = function(){
             msg = (curCount+1) + ": " + cards[index].partial +"\n";
             ans = cards[index].cloze;            
         }
+
+        //Display flashcard and detect anwer, showing right or wrong 
         inquirer.prompt([
         {
             type: 'prompt',
@@ -121,6 +127,8 @@ var showQuestion = function(){
             ]
         }
         ]).then(function(response) {
+            //if yes, clear current cards in case user wants to switch card type
+            // and then call beginQuestions to start over
             if(response.continue === "Yes"){
                 cards = [];
                 beginQuestions();
